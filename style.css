@@ -1,117 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* ---------- RESET ---------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Audiowide", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
+
+/* ---------- ANIMATED NEON BACKGROUND ---------- */
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  padding: 15px;
   align-items: center;
   justify-content: center;
-  background: #f6f7fb;
+
+  background: linear-gradient(
+    270deg,
+    #0f2027,
+    #203a43,
+    #2c5364,
+    #00f2ff,
+    #ff00ff
+  );
+  background-size: 1000% 1000%;
+  animation: neonBG 18s ease infinite;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  max-width: 535px;
+
+@keyframes neonBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- NORMAL THEME (TOGGLE) ---------- */
+body.normal-theme {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  animation: none;
+}
+
+/* ---------- GAME WRAPPER ---------- */
+.game {
   width: 100%;
-  padding: 2rem 5rem;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  max-width: 520px;
+  padding: 20px;
+  position: relative;
 }
+
+/* ---------- TITLE ---------- */
+.title {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+/* ---------- THEME TOGGLE BUTTON ---------- */
+#themeToggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
+}
+
+#themeToggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- MAIN CONTAINER ---------- */
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.25),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- RESULT AREA ---------- */
 .result_images {
   display: flex;
-  gap: 7rem;
-  justify-content: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
-.container.start .user_result {
-  transform-origin: left;
-  animation: userShake 0.7s ease infinite;
+
+.hand {
+  text-align: center;
 }
-@keyframes userShake {
-  50% {
-    transform: rotate(10deg);
-  }
+
+.hand img {
+  width: 90px;
+  transition: transform 0.4s ease;
 }
-.container.start .bot_result {
-  transform-origin: right;
-  animation: botShake 0.7s ease infinite;
+
+.hand p {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 14px;
 }
-@keyframes botShake {
-  50% {
-    transform: rotate(-10deg);
-  }
-}
-.result_images img {
-  width: 100px;
-}
-.user_result img {
+
+.user img {
   transform: rotate(90deg);
 }
-.bot_result img {
+
+.bot img {
   transform: rotate(-90deg) rotateY(180deg);
 }
+
+/* ---------- SHAKE ANIMATION ---------- */
+.container.shake .user img {
+  animation: shakeUser 0.6s infinite;
+}
+
+.container.shake .bot img {
+  animation: shakeBot 0.6s infinite;
+}
+
+@keyframes shakeUser {
+  50% { transform: rotate(100deg); }
+}
+
+@keyframes shakeBot {
+  50% { transform: rotate(-100deg) rotateY(180deg); }
+}
+
+/* ---------- RESULT TEXT ---------- */
 .result {
   text-align: center;
-  font-size: 2rem;
-  color: #7d2ae8;
-  margin: 1.5rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffeaa7;
+  margin: 15px 0;
 }
-.option_image img {
-  width: 50px;
-}
+
+/* ---------- OPTIONS ---------- */
 .option_images {
   display: flex;
-  width: 100%;
-  align-items: center;
-  margin-top: 2.5rem;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-top: 25px;
 }
-.container.start .option_images {
-  pointer-events: none;
-}
-.option_image {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 0.5;
+
+.option {
+  background: transparent;
+  border: none;
   cursor: pointer;
+  text-align: center;
+  opacity: 0.6;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.option img {
+  width: 55px;
+}
+
+.option span {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* ---------- NEON HOVER GLOW ---------- */
+.option::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  background: radial-gradient(circle, #00f2ff, #ff00ff, transparent 70%);
+  opacity: 0;
+  filter: blur(12px);
   transition: opacity 0.3s ease;
-}
-.option_image:hover {
-  opacity: 1;
-}
-.option_image.active {
-  opacity: 1;
-}
-.option_image img {
-  pointer-events: none;
-}
-.option_image p {
-  color: #7d2ae8;
-  font-size: 1.235rem;
-  margin-top: 1rem;
-  pointer-events: none;
+  z-index: -1;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding: 2rem;
-  }
-  .result_images img {
-    width: 80px;
-  }
+.option:hover::after,
+.option.active::after {
+  opacity: 1;
 }
 
-@media (max-width: 500px) {
-  .option_images {
-    justify-content: space-between;
+.option:hover,
+.option.active {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .hand img {
+    width: 70px;
   }
-  .option_image img {
-    width: 40px;
+
+  .option img {
+    width: 45px;
   }
 }
