@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* ---------- RESET ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -8,12 +7,12 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* ---------- ANIMATED NEON BACKGROUND ---------- */
+/* 🌈 ANIMATED NEON BACKGROUND (ALWAYS ON) */
 body {
   min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   background: linear-gradient(
     270deg,
@@ -21,9 +20,10 @@ body {
     #203a43,
     #2c5364,
     #00f2ff,
-    #ff00ff
+    #ff00ff,
+    #00ff9d
   );
-  background-size: 1000% 1000%;
+  background-size: 1200% 1200%;
   animation: neonBG 18s ease infinite;
 }
 
@@ -33,78 +33,60 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* ---------- NORMAL THEME (TOGGLE) ---------- */
-body.normal-theme {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  animation: none;
-}
-
-/* ---------- GAME WRAPPER ---------- */
+/* GAME */
 .game {
   width: 100%;
   max-width: 520px;
   padding: 20px;
-  position: relative;
+  text-align: center;
 }
 
-/* ---------- TITLE ---------- */
 .title {
-  text-align: center;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   letter-spacing: 1px;
 }
 
-/* ---------- THEME TOGGLE BUTTON ---------- */
-#themeToggle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  transition: 0.3s ease;
-}
-
-#themeToggle:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* ---------- MAIN CONTAINER ---------- */
+/* GAME BOX */
 .container {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255,255,255,0.15);
   backdrop-filter: blur(12px);
   border-radius: 18px;
-  padding: 30px;
+  padding: 25px;
   box-shadow:
-    0 0 25px rgba(0, 255, 255, 0.25),
-    0 20px 40px rgba(0, 0, 0, 0.3);
+    0 0 30px rgba(0,255,255,0.35),
+    0 20px 40px rgba(0,0,0,0.3);
 }
 
-/* ---------- RESULT AREA ---------- */
+/* SCOREBOARD */
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.score {
+  flex: 1;
+}
+
+.score span {
+  font-size: 13px;
+  color: #ddd;
+}
+
+.score h2 {
+  font-size: 1.8rem;
+  color: #00f2ff;
+}
+
+/* HANDS */
 .result_images {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.hand {
-  text-align: center;
 }
 
 .hand img {
-  width: 90px;
-  transition: transform 0.4s ease;
-}
-
-.hand p {
-  margin-top: 8px;
-  color: #fff;
-  font-size: 14px;
+  width: 85px;
 }
 
 .user img {
@@ -115,7 +97,7 @@ body.normal-theme {
   transform: rotate(-90deg) rotateY(180deg);
 }
 
-/* ---------- SHAKE ANIMATION ---------- */
+/* SHAKE */
 .container.shake .user img {
   animation: shakeUser 0.6s infinite;
 }
@@ -132,44 +114,38 @@ body.normal-theme {
   50% { transform: rotate(-100deg) rotateY(180deg); }
 }
 
-/* ---------- RESULT TEXT ---------- */
+/* RESULT */
 .result {
-  text-align: center;
   font-size: 1.6rem;
-  font-weight: 600;
   color: #ffeaa7;
-  margin: 15px 0;
+  margin: 12px 0;
 }
 
-/* ---------- OPTIONS ---------- */
+/* OPTIONS */
 .option_images {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
 .option {
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
-  text-align: center;
   opacity: 0.6;
-  transition: 0.3s ease;
   position: relative;
+  transition: 0.3s;
 }
 
 .option img {
-  width: 55px;
+  width: 50px;
 }
 
 .option span {
-  display: block;
-  margin-top: 8px;
   color: #fff;
   font-size: 14px;
 }
 
-/* ---------- NEON HOVER GLOW ---------- */
 .option::after {
   content: "";
   position: absolute;
@@ -177,13 +153,8 @@ body.normal-theme {
   background: radial-gradient(circle, #00f2ff, #ff00ff, transparent 70%);
   opacity: 0;
   filter: blur(12px);
-  transition: opacity 0.3s ease;
+  transition: 0.3s;
   z-index: -1;
-}
-
-.option:hover::after,
-.option.active::after {
-  opacity: 1;
 }
 
 .option:hover,
@@ -192,13 +163,28 @@ body.normal-theme {
   transform: scale(1.15);
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 480px) {
-  .hand img {
-    width: 70px;
-  }
+.option:hover::after,
+.option.active::after {
+  opacity: 1;
+}
 
-  .option img {
-    width: 45px;
-  }
+/* 🔄 RESET BUTTON (BELOW BOX) */
+.controls {
+  margin-top: 20px;
+}
+
+#resetBtn {
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff00ff, #00f2ff);
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(0,255,255,0.8);
+  transition: 0.3s;
+}
+
+#resetBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255,0,255,0.9);
 }
