@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rock Paper Scissors</title>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,40 +11,62 @@
   <main class="game">
     <h1 class="title">Rock • Paper • Scissors</h1>
 
+    <!-- GAME BOX -->
     <section class="container">
-      <div class="result_field">
-        <div class="result_images">
-          <div class="hand user">
-            <img src="rock.png" alt="User choice">
-            <p>You</p>
-          </div>
 
-          <div class="hand bot">
-            <img src="rock.png" alt="Bot choice">
-            <p>Bot</p>
-          </div>
+      <!-- SCOREBOARD -->
+      <div class="scoreboard">
+        <div class="score">
+          <span>You</span>
+          <h2 id="userScore">0</h2>
         </div>
-
-        <div class="result">Make your move!</div>
+        <div class="score">
+          <span>Draw</span>
+          <h2 id="drawScore">0</h2>
+        </div>
+        <div class="score">
+          <span>Bot</span>
+          <h2 id="botScore">0</h2>
+        </div>
       </div>
 
+      <!-- HANDS -->
+      <div class="result_images">
+        <div class="hand user">
+          <img src="rock.png" alt="User">
+          <p>You</p>
+        </div>
+        <div class="hand bot">
+          <img src="rock.png" alt="Bot">
+          <p>Bot</p>
+        </div>
+      </div>
+
+      <div class="result">Make your move!</div>
+
+      <!-- OPTIONS -->
       <div class="option_images">
         <button class="option" data-choice="rock">
-          <img src="rock.png" alt="Rock">
+          <img src="rock.png">
           <span>Rock</span>
         </button>
-
         <button class="option" data-choice="paper">
-          <img src="paper.png" alt="Paper">
+          <img src="paper.png">
           <span>Paper</span>
         </button>
-
         <button class="option" data-choice="scissors">
-          <img src="scissors.png" alt="Scissors">
+          <img src="scissors.png">
           <span>Scissors</span>
         </button>
       </div>
+
     </section>
+
+    <!-- RESET BUTTON (OUTSIDE BOX) -->
+    <div class="controls">
+      <button id="resetBtn">🔄 Reset Game</button>
+    </div>
+
   </main>
 
   <script src="script.js"></script>
