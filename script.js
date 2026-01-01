@@ -1,51 +1,48 @@
-const gameContainer = document.querySelector(".container");
-const userResult = document.querySelector(".user_result img");
-const botResult = document.querySelector(".bot_result img");
-const result = document.querySelector(".result");
-const optionImages = document.querySelectorAll(".option_image");
+const container = document.querySelector(".container");
+const userImg = document.querySelector(".user img");
+const botImg = document.querySelector(".bot img");
+const resultText = document.querySelector(".result");
+const options = document.querySelectorAll(".option");
 
-const botImages = ["rock.png", "paper.png", "scissors.png"];
-const outcomes = {
-  RR: "Draw",
-  RP: "BOT",
-  RS: "YOU",
-  PP: "Draw",
-  PR: "YOU",
-  PS: "BOT",
-  SS: "Draw",
-  SR: "BOT",
-  SP: "YOU"
+const choices = ["rock", "paper", "scissors"];
+
+const winMap = {
+  rock: "scissors",
+  paper: "rock",
+  scissors: "paper"
 };
 
-function handleOptionClick(event) {
-  const clickedImage = event.currentTarget;
-  const clickedIndex = Array.from(optionImages).indexOf(clickedImage);
+options.forEach(option => {
+  option.addEventListener("click", () => playGame(option.dataset.choice));
+});
 
-  userResult.src = botResult.src = "rock.png";
-  result.textContent = "Wait...";
+function playGame(userChoice) {
+  setActive(userChoice);
 
-  optionImages.forEach((image, index) => {
-    image.classList.toggle("active", index === clickedIndex);
-  });
-  gameContainer.classList.add("start");
+  resultText.textContent = "Waiting...";
+  userImg.src = botImg.src = "rock.png";
+  container.classList.add("shake");
+
   setTimeout(() => {
-    gameContainer.classList.remove("start");
-    
-    const userImageSrc = clickedImage.querySelector("img").src;
-    userResult.src = userImageSrc;
-    const randomNumber = Math.floor(Math.random() * botImages.length);
-    const botImageSrc = botImages[randomNumber];
-    botResult.src = botImageSrc;
+    container.classList.remove("shake");
 
-    const userValue = ["R", "P", "S"][clickedIndex];
-    const botValue = ["R", "P", "S"][randomNumber];
-    const outcomeKey = userValue + botValue;
-    const outcome = outcomes[outcomeKey] || "Unknown";
+    const botChoice = choices[Math.floor(Math.random() * 3)];
 
-    result.textContent = userValue === botValue ? "Match Draw" : `${outcome} WON!`;
-  }, 2500);
+    userImg.src = `${userChoice}.png`;
+    botImg.src = `${botChoice}.png`;
+
+    if (userChoice === botChoice) {
+      resultText.textContent = "It's a Draw 😐";
+    } else if (winMap[userChoice] === botChoice) {
+      resultText.textContent = "You Win 🎉";
+    } else {
+      resultText.textContent = "Bot Wins 🤖";
+    }
+  }, 1200);
 }
 
-optionImages.forEach(image => {
-  image.addEventListener("click", handleOptionClick);
-});
+function setActive(choice) {
+  options.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.choice === choice);
+  });
+}
